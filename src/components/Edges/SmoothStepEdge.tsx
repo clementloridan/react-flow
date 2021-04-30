@@ -83,8 +83,8 @@ export function getSmoothStepPath({
     } else {
       firstCornerPath =
         sourceY <= targetY
-          ? bottomRightCorner(sourceX, targetY, cornerSize)
-          : topRightCorner(sourceX, targetY, cornerSize);
+          ? leftTopCorner(targetX, sourceY, cornerSize)
+          : leftBottomCorner(targetX, sourceY, cornerSize);
     }
     secondCornerPath = '';
   } else if (!leftAndRight.includes(sourcePosition) && leftAndRight.includes(targetPosition)) {
@@ -124,7 +124,7 @@ export default memo(
     markerEndId,
     borderRadius = 5,
   }: EdgeSmoothStepProps) => {
-    const [centerX, centerY] = getCenter({ sourceX, sourceY, targetX, targetY });
+    const [centerX, centerY] = getCenter({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition });
 
     const path = getSmoothStepPath({
       sourceX,
